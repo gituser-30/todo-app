@@ -43,4 +43,5 @@ cron.schedule("0 8 * * *", async () => {
 // Routes
 app.use("/api/tasks", require("./routes/taskRoutes"));
 
-app.listen(5000, () => console.log("Server running"));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log("Server running"));

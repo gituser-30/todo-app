@@ -1,35 +1,106 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
   <title>Study Planner</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+    }
+
+    .container {
+      width: 350px;
+      padding: 30px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      text-align: center;
+      color: white;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    input::placeholder {
+      color: #555;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 10px;
+      background: #ffffff;
+      color: #333;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #f1f1f1;
+      transform: scale(1.03);
+    }
+
+  </style>
 </head>
+
 <body>
 
-<h2>Add Task</h2>
+  <div class="container">
+    <h2>Add Task</h2>
 
-<input type="text" id="title" placeholder="Task">
-<input type="date" id="date">
-<input type="email" id="email" placeholder="Email">
+    <input type="text" id="title" placeholder="Task">
+    <input type="date" id="date">
+    <input type="email" id="email" placeholder="Email">
 
-<button onclick="addTask()">Add</button>
+    <button onclick="addTask()">Add</button>
+  </div>
 
-<script>
-async function addTask() {
-  const task = {
-    title: document.getElementById("title").value,
-    date: document.getElementById("date").value,
-    email: document.getElementById("email").value
-  };
+  <script>
+  async function addTask() {
+    const task = {
+      title: document.getElementById("title").value,
+      date: document.getElementById("date").value,
+      email: document.getElementById("email").value
+    };
 
-  await fetch("/api/tasks", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(task)
-  });
+    await fetch("/api/tasks", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(task)
+    });
 
-  alert("Task added!");
-}
-</script>
+    alert("Task added!");
+  }
+  </script>
 
 </body>
 </html>
+```
