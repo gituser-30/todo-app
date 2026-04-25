@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Study Planner</title>
+</head>
+<body>
+
+<h2>Add Task</h2>
+
+<input type="text" id="title" placeholder="Task">
+<input type="date" id="date">
+<input type="email" id="email" placeholder="Email">
+
+<button onclick="addTask()">Add</button>
+
+<script>
+async function addTask() {
+  const task = {
+    title: document.getElementById("title").value,
+    date: document.getElementById("date").value,
+    email: document.getElementById("email").value
+  };
+
+  await fetch("/api/tasks", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(task)
+  });
+
+  alert("Task added!");
+}
+</script>
+
+</body>
+</html>
