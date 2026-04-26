@@ -23,21 +23,23 @@ const transporter = nodemailer.createTransport({
 });
 
 // ⏰ Daily Cron Job (runs every day at 8 AM)
-cron.schedule("0 8 * * *", async () => {
-  const today = new Date().toISOString().split("T")[0];
+cron.schedule("* * * * *", async () => {
+  console.log("Cron triggered");
+
+  const today = new Date().toLocaleDateString("en-CA");
+  console.log("Today:", today);
 
   const tasks = await Task.find({ date: today });
+  console.log("Tasks found:", tasks);
 
   tasks.forEach(task => {
     transporter.sendMail({
       from: process.env.EMAIL,
       to: task.email,
-      subject: "📌 Today's Task Reminder",
-      text: `You planned: ${task.title}`
+      subject: "Test Reminder",
+      text: `Task: ${task.title}`
     });
   });
-
-  console.log("Emails sent");
 });
 
 // Routes
