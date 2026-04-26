@@ -32,14 +32,20 @@ cron.schedule("* * * * *", async () => {
   const tasks = await Task.find({ date: today });
   console.log("Tasks found:", tasks);
 
-  tasks.forEach(task => {
-    transporter.sendMail({
+  tasks.forEach(async (task) => {
+  try {
+    let info = await transporter.sendMail({
       from: process.env.EMAIL,
       to: task.email,
-      subject: "Test Reminder",
+      subject: "📌 Study Reminder",
       text: `Task: ${task.title}`
     });
-  });
+
+    console.log("Email sent:", info.response);
+  } catch (error) {
+    console.error("Email error:", error);
+  }
+});
 });
 
 // Routes
